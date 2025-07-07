@@ -24,11 +24,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Init Terraform
+      - name: Terraform Init
         run: terraform init
+        env:
+          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Plan Terraform
+      - name: Terraform Plan
         run: terraform plan -var-file="terraform.tfvars"
+        env:
+          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Apply Terraform
+      - name: Terraform Apply
         run: terraform apply -var-file="terraform.tfvars" -auto-approve
+        env:
+          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
