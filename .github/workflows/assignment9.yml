@@ -27,14 +27,23 @@ jobs:
       - name: Terraform Init
         run: terraform init
         env:
-          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          TF_VAR_client_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}
+          TF_VAR_client_secret: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
+          TF_VAR_tenant_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
+          TF_VAR_subscription_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
 
       - name: Terraform Plan
         run: terraform plan -var-file="terraform.tfvars"
         env:
-          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          TF_VAR_client_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}
+          TF_VAR_client_secret: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
+          TF_VAR_tenant_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
+          TF_VAR_subscription_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
 
       - name: Terraform Apply
         run: terraform apply -var-file="terraform.tfvars" -auto-approve
         env:
-          TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          TF_VAR_client_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}
+          TF_VAR_client_secret: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
+          TF_VAR_tenant_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
+          TF_VAR_subscription_id: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
